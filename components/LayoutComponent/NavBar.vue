@@ -1,10 +1,9 @@
 <template>
   <v-app-bar fixed app flat dense :clipped-right="false">
     <v-app-bar-nav-icon @click="updateDrawer" />
-    <v-toolbar-title v-text="getTitle" />
+    <v-toolbar-title v-text="getTitle" v-if="!getMobileView" />
     <v-spacer />
     <v-text-field
-      v-if="!getMobileView"
       type="search"
       prepend-inner-icon="mdi-magnify"
       class="mr-5 mt-5"
@@ -17,12 +16,13 @@
       </template>
       <v-icon @click="clickedNotification">mdi-bell</v-icon>
     </v-badge>
-    <v-btn icon v-if="getMobileView " @click="updateRightDrawer">
+    <v-btn icon v-if="getMobileView" @click="updateRightDrawer" class="ml-3">
       <v-icon>mdi-message-alert</v-icon>
     </v-btn>
-    <v-btn icon @click="updateDarkMode" :ripple="false">
+    <v-btn icon @click="updateDarkMode" v-if="!getMobileView" :ripple="false">
       <v-icon>{{ getDarkMode ? 'mdi-lightbulb':'mdi-lightbulb-on'}}</v-icon>
     </v-btn>
+
     <v-menu bottom left>
       <template v-slot:activator="{on}">
         <!-- Reserved for account name or image icon -->
@@ -31,6 +31,12 @@
         </v-btn>
       </template>
       <v-list dense>
+        <v-list-item @click="updateDarkMode" v-if="getMobileView">
+          <v-list-item-action>
+            <v-icon>{{ getDarkMode ? 'mdi-lightbulb':'mdi-lightbulb-on'}}</v-icon>
+          </v-list-item-action>
+          <v-list-item-title>Dark Mode</v-list-item-title>
+        </v-list-item>
         <v-list-item v-for="(item,index) in items" :key="index" @click="item.action">
           <v-list-item-action>
             <v-icon>{{item.icon}}</v-icon>
@@ -57,7 +63,7 @@ export default Vue.extend({
            * you can put arrow function here
            * but you can't call `this.action()` inside of a data class.
            */
-          action: () => this.$router.push('/guest')
+          action: () => this.$router.push('/account')
         },
         {
           name: 'Settings',
