@@ -1,0 +1,52 @@
+<template>
+  <v-navigation-drawer v-model="$store.state.UI.rightDrawer" right fixed app width="20rem">
+    <v-list dense nav>
+      <v-list-item class="green">
+        <v-list-item-title class="title white--text text-center">Announcements</v-list-item-title>
+      </v-list-item>
+      <v-divider></v-divider>
+      <v-list-item
+        :ripple="false"
+        v-for="(comment) in getComments"
+        :key="comment.id"
+        exact
+        active-class=" green--text"
+        three-line
+      >
+        <v-card class="mt-3 mt-1" outlined>
+          <v-list-item>
+            <v-list-item-avatar color="grey"></v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-text="comment.name" />
+              <v-list-item-subtitle v-text="comment.email"></v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-card-text v-text="comment.body"></v-card-text>
+          <v-card-actions>
+            <v-btn text color="primary" small :ripple="false">See more</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { mapGetters } from 'vuex'
+export default Vue.extend({
+  computed: {
+    getDarkMode() {
+      return this.$accessor.UI.getDarkMode
+    },
+    getComments() {
+      return this.$accessor.comments.GET_COMMENTS
+    },
+    getCurrentRoute(): boolean {
+      return this.$route.path.match('/admin') ? true : false
+    }
+  }
+})
+</script>
+<style>
+</style>

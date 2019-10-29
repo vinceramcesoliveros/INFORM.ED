@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <side-bar></side-bar>
     <nav-bar></nav-bar>
     <v-content>
@@ -7,21 +7,28 @@
         <nuxt />
       </v-container>
     </v-content>
+    <misc />
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import Misc from '@/components/LayoutComponent/Misc.vue'
 import SideBar from '@/components/LayoutComponent/SideBar.vue'
 import NavBar from '@/components/LayoutComponent/NavBar.vue'
-import { mapMutations, mapGetters } from 'vuex'
 export default Vue.extend({
   components: {
     SideBar,
-    NavBar
+    NavBar,
+    Misc
   },
   data() {
     return {}
-  }
+  },
+  async beforeCreate() {
+    await this.$accessor.comments.FETCH_COMMENTS()
+    console.log(this.$accessor.comments.GET_COMMENTS)
+  },
+  created() {}
 })
 </script>

@@ -36,6 +36,7 @@ export default {
   buildModules: [
     '@nuxtjs/vuetify',
     '@nuxt/typescript-build',
+    'nuxt-typed-vuex',
   ],
   /*
   ** Nuxt.js modules
@@ -52,14 +53,33 @@ export default {
   axios: {
     baseURL: process.env.PORT || 'http://localhost:3000'
   },
+  /**
+   * Loading UI
+   */
+
+  loading: '~/components/Skeleton/SkeletonUI.vue',
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
   */
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    global: {
+      ripple: false
+    },
     theme: {
+
       themes: {
+
+        light: {
+          primary: colors.green.darken1,
+          accent: colors.grey.lighten3,
+          secondary: colors.amber.lighten3,
+          info: colors.teal.darken1,
+          warning: colors.amber.base,
+          error: colors.red.darken2,
+          success: colors.green.accent3,
+        },
         dark: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,
@@ -76,6 +96,9 @@ export default {
   ** Build configuration
   */
   build: {
+    transpile:[
+      /nuxt-typed-vuex/,
+    ],
     /*
     ** You can extend webpack config here
     */

@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-const title: string = 'Second Dashboard'
+const title: string = 'Subjects'
 import Vue from 'vue'
 export default Vue.extend({
   head() {

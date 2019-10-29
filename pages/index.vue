@@ -1,5 +1,7 @@
 <template>
-  <v-layout row></v-layout>
+  <v-layout row>
+    Hello World
+  </v-layout>
 </template>
 
 <script lang="ts">
@@ -12,7 +14,7 @@ export default Vue.extend({
     }
   },
   components: {},
-  created() {
+  beforeCreate() {
     this.$store.commit('UI/updateTitle', { title: title })
   }
 })

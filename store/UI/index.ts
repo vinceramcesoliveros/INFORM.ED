@@ -1,80 +1,129 @@
+import { getterTree, actionTree, mutationTree } from 'nuxt-typed-vuex'
 
 
-export const state = (): RootState => ({
+export const state = () => ({
     title: '',
     drawer: true,
+    rightDrawer: true,
+    darkMode: false,
     items: [
         {
             icon: 'mdi-apps',
-            title: 'Welcome',
+            title: 'Home',
             to: '/'
+            //Add access role type which item belongs to.
         },
         {
             icon: 'mdi-chart-bubble',
-            title: 'Inspire',
-            to: '/inspire'
+            title: 'Subjects Taken',
+            to: '/subjects'
         },
         {
-            icon: "mdi-github",
-            title: "GitHub",
-            to: "/github"
+            icon: 'mdi-star',
+            title: 'Grades',
+            to: '/grade'
+        },
+        {
+            icon: 'mdi-notebook-outline',
+            title: 'Course',
+            to: '/course',
         }
     ],
-    categories: [{
-        icon: '',
-        title: '',
-        items: [
-            {
-                title: '',
-                icon: '',
-                to: '',
+    administrator: [
+        {
+            title: 'Accounts',
+            icon: 'mdi-account',
+            to: '/admin/accounts',
 
-            }
-        ]
-    }
+        },
+        {
+            title: 'Students',
+            icon: 'mdi-folder-account',
+            to: '/admin/students'
+        },
+        {
+            title: 'Teacher',
+            icon: 'mdi-teach',
+            to: '/admin/teachers',
+        },
+        {
+            title: 'Roles',
+            icon: 'mdi-shield',
+            to: '/admin/roles'
+        },
+        {
+            title: 'Access Rights',
+            icon: 'mdi-key-variant',
+            to: '/admin/access-rights'
+        },
+        {
+            title: 'Rooms',
+            icon: 'mdi-door',
+            to: '/admin/rooms'
+        },
+        {
+            title: 'Subjects',
+            icon: 'mdi-book-open-page-variant',
+            to: '/admin/subjects'
+        },
+        {
+            title: "Syllabus",
+            icon: 'mdi-notebook-outline',
+            to: '/admin/syllabus'
+        },
+        {
+            title: 'Grades',
+            icon: 'mdi-star',
+            to: '/admin/grades'
+        }
     ]
 })
 
-export const mutations: MutationState = {
+export type RootState = ReturnType<typeof state>
+export const mutations = mutationTree(state, {
     updateDrawer(state: RootState): void {
         state.drawer = !state.drawer;
     },
+    updateRightDrawer(state: RootState): void {
+        state.rightDrawer = !state.rightDrawer
+    },
     updateTitle(state: RootState, { title = "" }): void {
         state.title = title;
+    },
+    updateDarkMode(state: RootState): void {
+        state.darkMode = !state.darkMode
+    },
+    mobileView(state: RootState): void {
+        state.drawer = false;
+        state.rightDrawer = false;
     }
-}
+})
 
 
-export const getters = {
+export const getters = getterTree(state, {
     getItems(state: RootState): Item[] {
         return state.items;
     },
     getTitle(state: RootState): string {
-        return state.title;
+        return state.title || '';
+    },
+    getAdministrator(state: RootState): Administrator[] {
+        return state.administrator;
+    },
+    getDarkMode(state: RootState): boolean {
+        return state.darkMode
     }
-}
+})
 
-
-
-type RootState = {
-    drawer: boolean;
-    items: Item[];
-    categories: Category[];
-    title?: string;
-}
 
 type Item = {
     icon: string;
     title: string;
     to: string
 }
-type Category = {
+type Administrator = {
     icon: string,
     title: string,
-    items: Item[]
+    to: string
 }
 
-type MutationState = {
-    updateDrawer: Function;
-    updateTitle: Function;
-}
