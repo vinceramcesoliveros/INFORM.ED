@@ -27,7 +27,6 @@ export default Vue.extend({
   },
   async beforeCreate() {
     await this.$accessor.comments.FETCH_COMMENTS()
-    console.log(this.$accessor.comments.GET_COMMENTS)
   },
   created() {}
 })

@@ -29,6 +29,7 @@
           :to="item.to"
           active-class="blue--text"
           exact
+          :ripple="false"
         >
           <v-list-item-action>
             <v-icon>{{item.icon}}</v-icon>
