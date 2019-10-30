@@ -1,14 +1,15 @@
 <template>
   <v-app-bar fixed app flat dense :clipped-right="false">
     <v-app-bar-nav-icon @click="updateDrawer" />
-    <v-toolbar-title v-text="getTitle" v-if="!getMobileView" />
-    <v-spacer />
+    <v-toolbar-title v-text="getTitle" v-if="!getMobileView" class="mr-3" />
+    <v-spacer></v-spacer>
     <v-text-field
       type="search"
       prepend-inner-icon="mdi-magnify"
       class="mr-5 mt-5"
       placeholder="Search Student"
     ></v-text-field>
+    <v-spacer />
     <v-badge color="red lighten-2" overlap>
       <template v-slot:badge>
         <!-- Notification Count badge, -->

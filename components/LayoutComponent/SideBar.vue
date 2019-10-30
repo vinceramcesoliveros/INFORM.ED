@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="$store.state.UI.drawer" fixed app width="20rem">
+  <v-navigation-drawer v-model="$store.state.UI.drawer" fixed app >
     <v-list dense nav>
       <v-list-item
         :ripple="false"
@@ -47,6 +47,11 @@
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 export default Vue.extend({
+  data(){
+    return{
+      min:true,
+    }
+  },
   computed: {
     ...mapGetters({
       getItems: 'UI/getItems',
