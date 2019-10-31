@@ -1,7 +1,7 @@
 {
-  "name": "nuxt-typescript-enrollment",
+  "name": "inform.ed",
   "version": "1.0.0",
-  "description": "Classical Enrollment System",
+  "description": "Decentralize Universal Information Education Application",
   "author": "Vince Ramces Oliveros",
   "private": true,
   "scripts": {
