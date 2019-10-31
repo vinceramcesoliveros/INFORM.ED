@@ -1,6 +1,22 @@
 <template>
   <v-layout>
-    <v-skeleton-loader min-width="90%" class="mx-auto mt-5" type="article"></v-skeleton-loader>
+    <div v-if="getPosts">
+      <v-col v-for="post in getPosts" :key="post.id">
+        <v-card class="mt-3 mt-1" outlined>
+          <v-list-item>
+            <v-list-item-avatar color="grey"></v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-text="post.title" />
+            </v-list-item-content>
+          </v-list-item>
+          <v-card-text v-text="post.body"></v-card-text>
+          <v-card-actions>
+            <v-btn text color="primary" small :ripple="false">See more</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </div>
+    <v-skeleton-loader v-else min-width="90%" class="mx-auto mt-5" type="article"></v-skeleton-loader>
   </v-layout>
 </template>
 

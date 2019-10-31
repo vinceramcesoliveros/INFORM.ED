@@ -20,14 +20,19 @@
     <v-btn icon v-if="getMobileView" @click="updateRightDrawer" class="ml-2">
       <v-icon>mdi-message-alert</v-icon>
     </v-btn>
-    <v-icon
-      @click="updateDarkMode"
-      v-if="!getMobileView"
-      class="ml-2"
-      :ripple="false"
-    >{{ getDarkMode ? 'mdi-brightness-3':'mdi-brightness-5'}}</v-icon>
-
-    <v-menu bottom nudge-bottom="30" left >
+    <v-tooltip bottom eager>
+      <template v-slot:activator="{ on }">
+        <v-icon
+          v-on="on"
+          @click="updateDarkMode"
+          v-if="!getMobileView"
+          class="ml-2"
+          :ripple="false"
+        >{{ getDarkMode ? 'mdi-brightness-3':'mdi-brightness-5'}}</v-icon>
+      </template>
+      <span>Toggle {{getDarkMode ? 'Light':'Dark'}} mode</span>
+    </v-tooltip>
+    <v-menu bottom nudge-bottom="30" left>
       <template v-slot:activator="{on}">
         <!-- Reserved for account name or image icon -->
         <v-icon v-on="on" icon :ripple="false" class="ml-3">mdi-account-circle</v-icon>
