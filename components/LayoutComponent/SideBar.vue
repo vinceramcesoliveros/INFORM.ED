@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="$store.state.UI.drawer" fixed app >
+  <v-navigation-drawer v-model="$store.state.UI.drawer" fixed app width="20rem">
     <v-list dense nav>
       <v-list-item
         :ripple="false"
@@ -8,7 +8,7 @@
         :to="item.to"
         router
         exact
-        color="primary"
+        active-class="green lighten-1 white--text"
       >
         <v-list-item-action>
           <v-icon medium>{{ item.icon }}</v-icon>
@@ -27,7 +27,6 @@
           v-for="item in getAdministrator"
           :key="item.to"
           :to="item.to"
-          active-class="blue--text"
           exact
           :ripple="false"
         >
@@ -47,25 +46,24 @@
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 export default Vue.extend({
-  data(){
-    return{
-      min:true,
+  data() {
+    return {
+      min: true
     }
   },
   computed: {
-    ...mapGetters({
-      getItems: 'UI/getItems',
-      getAdministrator: 'UI/getAdministrator'
-    }),
+    getItems() {
+      return this.$accessor.UI.getItems
+    },
+    getAdministrator() {
+      return this.$accessor.UI.getAdministrator
+    },
     getCurrentRoute(): boolean {
       return this.$route.path.match('/admin') ? true : false
     }
   },
-  beforeMount() {
-    if (window.innerWidth < 1260) {
-      this.$store.commit('UI/mobileView')
-    }
-  }
+  beforeMount() {},
+
 })
 </script>
 <style>

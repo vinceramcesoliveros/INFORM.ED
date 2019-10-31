@@ -1,30 +1,30 @@
 import { actionTree, getterTree, mutationTree } from 'nuxt-typed-vuex';
 
 export const state = () => ({
-    comments: null as null | Comment[]
+    posts: null as null | Post[]
 })
 export type RootState = ReturnType<typeof state>
 export const mutations = mutationTree(state, {
 
-    SET_COMMENTS(state: RootState, data: Comment[]) {
-        state.comments = data;
+    SET_POSTS(state: RootState, data: Post[]) {
+        state.posts = data;
     }
 })
 
 export const getters = getterTree(state, {
 
-    GET_COMMENTS(state: RootState) {
-        return state.comments
+    GET_POSTS(state: RootState) {
+        return state.posts
     }
 })
 
 export const actions = actionTree({ state, getters, mutations }, {
-    async FETCH_COMMENTS({ commit }) {
-        const res = await this.$axios.$get('https://jsonplaceholder.typicode.com/comments?_limit=10')
-        commit('SET_COMMENTS', res)
+    async FETCH_POSTS({ commit }) {
+        const res = await this.$axios.$get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+        commit("SET_POSTS",res)
     }
 })
-type Comment = {
+type Post = {
 
     postId: number;
     id: string;

@@ -2,9 +2,10 @@ import { getterTree, actionTree, mutationTree } from 'nuxt-typed-vuex'
 
 
 export const state = () => ({
+    width: 9999,
     title: '',
-    drawer: true,
-    rightDrawer: true,
+    drawer: false,
+    rightDrawer: false,
     darkMode: false,
     items: [
         {
@@ -96,6 +97,14 @@ export const mutations = mutationTree(state, {
     mobileView(state: RootState): void {
         state.drawer = false;
         state.rightDrawer = false;
+    },
+    
+    desktopView(state: RootState): void {
+        state.drawer = true;
+        state.rightDrawer = true;
+    },
+    updateWidth(state: RootState, data: number): void {
+        state.width = data;
     }
 })
 

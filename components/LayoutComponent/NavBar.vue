@@ -1,7 +1,7 @@
 <template>
   <v-app-bar fixed app flat dense :clipped-right="false">
     <v-app-bar-nav-icon @click="updateDrawer" />
-    <v-toolbar-title v-text="getTitle" v-if="!getMobileView" class="mr-3" />
+    <v-toolbar-title v-text="getTitle" v-if="!getMobileView" class="mr-2" />
     <v-spacer></v-spacer>
     <v-text-field
       type="search"
@@ -13,23 +13,24 @@
     <v-badge color="red lighten-2" overlap>
       <template v-slot:badge>
         <!-- Notification Count badge, -->
-        <span>1</span>
+        <span v-if="notificationCount !== 0">{{notificationCount}}</span>
       </template>
       <v-icon @click="clickedNotification">mdi-bell</v-icon>
     </v-badge>
-    <v-btn icon v-if="getMobileView" @click="updateRightDrawer" class="ml-3">
+    <v-btn icon v-if="getMobileView" @click="updateRightDrawer" class="ml-2">
       <v-icon>mdi-message-alert</v-icon>
     </v-btn>
-    <v-btn icon @click="updateDarkMode" v-if="!getMobileView" :ripple="false">
-      <v-icon>{{ getDarkMode ? 'mdi-lightbulb':'mdi-lightbulb-on'}}</v-icon>
-    </v-btn>
+    <v-icon
+      @click="updateDarkMode"
+      v-if="!getMobileView"
+      class="ml-2"
+      :ripple="false"
+    >{{ getDarkMode ? 'mdi-brightness-3':'mdi-brightness-5'}}</v-icon>
 
-    <v-menu bottom left>
+    <v-menu bottom nudge-bottom="30" left >
       <template v-slot:activator="{on}">
         <!-- Reserved for account name or image icon -->
-        <v-btn v-on="on" icon :ripple="false">
-          <v-icon>mdi-account-circle</v-icon>
-        </v-btn>
+        <v-icon v-on="on" icon :ripple="false" class="ml-3">mdi-account-circle</v-icon>
       </template>
       <v-list dense>
         <v-list-item @click="updateDarkMode" v-if="getMobileView">
@@ -52,10 +53,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapMutations, mapGetters } from 'vuex'
+
 export default Vue.extend({
   data() {
     return {
+      notificationInterval: () => {},
       width: 9999,
+      notificationCount: 0,
       items: [
         {
           name: 'Profile',
@@ -89,6 +93,8 @@ export default Vue.extend({
     },
     clickedNotification() {
       console.log('CLICKED NOTIFICATION')
+      this.notificationCount = 0
+      this.$router.push('/notifications')
     }
   },
   computed: {
@@ -99,14 +105,17 @@ export default Vue.extend({
       return this.$vuetify.theme.dark
     },
     getMobileView(): boolean {
-      return this.width < 1260
+      return this.$accessor.UI.width < 1260
     }
   },
-  beforeMount() {
-    window.addEventListener('resize', () => {
-      this.width = window.innerWidth
-    })
-    console.log(this.width)
+  mounted() {
+    if (process.client) {
+      this.$accessor.UI.updateWidth(window.innerWidth)
+    }
+    /** Will replace this into vuex, where whenever we navigate our page,
+     *  the notification count will be triggered.
+     */
+    this.notificationCount = Math.floor(Math.random() * 100 + 1)
   }
 })
 </script>

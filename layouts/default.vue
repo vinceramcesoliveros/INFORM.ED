@@ -1,13 +1,12 @@
 <template>
   <v-app>
-    <side-bar></side-bar>
     <nav-bar></nav-bar>
-    <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-content>
     <misc />
+    <v-content>
+      <nuxt/>
+    </v-content>
+    
+    <side-bar></side-bar>
   </v-app>
 </template>
 
@@ -18,16 +17,24 @@ import SideBar from '@/components/LayoutComponent/SideBar.vue'
 import NavBar from '@/components/LayoutComponent/NavBar.vue'
 export default Vue.extend({
   components: {
-    SideBar,
-    NavBar,
-    Misc
+    'side-bar': () => import('@/components/LayoutComponent/SideBar.vue'),
+    'nav-bar': () => import('@/components/LayoutComponent/NavBar.vue'),
+    misc: () => import('@/components/LayoutComponent/Misc.vue')
   },
   data() {
     return {}
   },
-  async beforeCreate() {
-    await this.$accessor.comments.FETCH_COMMENTS()
-  },
-  created() {}
+  created() {
+    if (process.client) {
+      window.addEventListener('resize', () => {
+        this.$accessor.UI.updateWidth(window.innerWidth)
+      })
+      if (window.innerWidth < 1260) {
+        this.$accessor.UI.mobileView()
+      } else {
+        this.$accessor.UI.desktopView()
+      }
+    }
+  }
 })
 </script>

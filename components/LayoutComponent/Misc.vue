@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer v-model="$store.state.UI.rightDrawer" right fixed app width="20rem">
-    <v-list dense nav>
+    <v-list v-if="getComments" dense nav>
       <v-list-item class="green">
         <v-list-item-title class="title white--text text-center">Announcements</v-list-item-title>
       </v-list-item>
@@ -9,7 +9,6 @@
         :ripple="false"
         v-for="(comment) in getComments"
         :key="comment.id"
-        exact
         active-class=" green--text"
         three-line
       >
@@ -28,6 +27,9 @@
         </v-card>
       </v-list-item>
     </v-list>
+    <v-list v-else>
+      <v-skeleton-loader min-width="20rem" class="mx-auto mt-5" type="list-item-avatar-three-line"></v-skeleton-loader>
+    </v-list>
   </v-navigation-drawer>
 </template>
 
@@ -41,10 +43,10 @@ export default Vue.extend({
     },
     getComments() {
       return this.$accessor.comments.GET_COMMENTS
-    },
-    getCurrentRoute(): boolean {
-      return this.$route.path.match('/admin') ? true : false
     }
+  },
+  async mounted() {
+    await this.$accessor.comments.FETCH_COMMENTS()
   }
 })
 </script>
