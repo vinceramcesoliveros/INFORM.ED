@@ -20,15 +20,18 @@ export const getters = getterTree(state, {
 
 export const actions = actionTree({ state, getters, mutations }, {
     async FETCH_POSTS({ commit }) {
-        const res = await this.$axios.$get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-        commit("SET_POSTS",res)
+        // Try to add a limit of 10 so that we don't want to request too much data.
+        const data: Post[] = await this.$axios.$get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+        commit("SET_POSTS", data)
+
     }
 })
 type Post = {
-
-    postId: number;
     id: string;
-    name: string;
-    email: string;
+    title: string;
     body: string;
+    userId: number;
+    message?: string;
+    statusCode?: number;
+
 }

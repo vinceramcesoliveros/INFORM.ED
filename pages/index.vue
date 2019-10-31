@@ -1,6 +1,6 @@
 <template>
-  <v-layout>
-    <div v-if="getPosts">
+  <v-layout justify-center align-content-center>
+    <div v-if="getPosts" style="width:100%">
       <v-col v-for="post in getPosts" :key="post.id">
         <v-card class="mt-3 mt-1" outlined>
           <v-list-item>
@@ -14,6 +14,12 @@
             <v-btn text color="primary" small :ripple="false">See more</v-btn>
           </v-card-actions>
         </v-card>
+      </v-col>
+    </div>
+
+    <div v-else-if="getError">
+      <v-col>
+        <p class="title">{{getError}}</p>
       </v-col>
     </div>
     <v-skeleton-loader v-else min-width="90%" class="mx-auto mt-5" type="article"></v-skeleton-loader>
@@ -32,12 +38,20 @@ export default Vue.extend({
   computed: {
     getPosts() {
       return this.$accessor.posts.GET_POSTS
+    },
+    getError() {
+      return this.$accessor.GET_ERRORS
     }
   },
   components: {},
   async beforeCreate() {
     this.$accessor.UI.updateTitle({ title })
-    await this.$accessor.posts.FETCH_POSTS()
+    try {
+      await this.$accessor.posts.FETCH_POSTS()
+    } catch (error) {
+      this.$accessor.SET_ERROR(error.message)
+      console.log(error)
+    }
   }
 })
 </script>

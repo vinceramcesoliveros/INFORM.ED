@@ -11,7 +11,7 @@
           ></v-img>
         </v-flex>
         <v-flex xs12 md12 lg12>
-          <p class="font-weight-bold" style="font-size:2.5rem">{{this.otherError}}</p>
+          <p class="font-weight-bold" style="font-size:2.5rem">{{otherError}}</p>
         </v-flex>
         <v-flex xs12 md12 lg12>
           <v-btn large color="primary" outlined :ripple="false" @click="$router.go(-1)">Go back</v-btn>
@@ -21,27 +21,36 @@
   </v-content>
 </template>
 
-<script>
+<script >
+import Vue from 'vue'
 export default {
   layout: 'ErrorLayout',
+  head() {
+    let title = ''
+    if (this.error.statusCode === 404) {
+      return {
+        title
+      }
+    }
+    return {
+      title: this.error.message ? this.error.message : this.error
+    }
+  },
   props: {
     error: {
       type: Object,
       default: null
     }
   },
-  head() {
-    const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
-    return {
-      title
-    }
-  },
+
   data() {
     return {
       pageNotFound: '404 Not Found',
       otherError: 'An error occurred'
     }
+  },
+  created() {
+    this.otherError = this.error.message ? this.error.message : this.error
   }
 }
 </script>

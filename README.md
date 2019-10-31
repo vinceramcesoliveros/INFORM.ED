@@ -13,6 +13,8 @@ TBD
 
 ### Built With
 - NuxtJS
+- TypeScript
+- [Nuxt Typed Vuex](https://github.com/danielroe/nuxt-typed-vuex)(Vanilla TS)
 - PostgreSQL
 - ExpressJS (Will transition to GO if performance is concerned)
 - Vuetify

@@ -1,9 +1,8 @@
 <template>
   <v-container>
     <v-row row justify-space-between>
-      <v-col md="6" lg="10" sm="6">Notifications</v-col>
-      <v-spacer></v-spacer>
-      <v-col class="mx-auto">
+      <v-col align-self="start" class="text-left">Notifications</v-col>
+      <v-col class="text-right" align-self="end">
         <v-btn small outlined :ripple="false">Clear All</v-btn>
       </v-col>
     </v-row>

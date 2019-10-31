@@ -1,6 +1,6 @@
 <template>
   <v-app-bar fixed app flat dense :clipped-right="false">
-    <v-app-bar-nav-icon @click="updateDrawer" />
+    <v-app-bar-nav-icon @click="updateDrawer" v-if="getMobileView" />
     <v-toolbar-title v-text="getTitle" v-if="!getMobileView" class="mr-2" />
     <v-spacer></v-spacer>
     <v-text-field
@@ -20,12 +20,11 @@
     <v-btn icon v-if="getMobileView" @click="updateRightDrawer" class="ml-2">
       <v-icon>mdi-message-alert</v-icon>
     </v-btn>
-    <v-tooltip bottom eager>
+    <v-tooltip bottom eager v-if="!getMobileView">
       <template v-slot:activator="{ on }">
         <v-icon
           v-on="on"
           @click="updateDarkMode"
-          v-if="!getMobileView"
           class="ml-2"
           :ripple="false"
         >{{ getDarkMode ? 'mdi-brightness-3':'mdi-brightness-5'}}</v-icon>

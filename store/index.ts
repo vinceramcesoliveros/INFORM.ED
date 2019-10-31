@@ -7,10 +7,21 @@ import * as posts from './posts';
 export const strict = false;
 
 export const state = () => ({
-    data: null,
+    data: null as null | string,
 });
-export const mutations = mutationTree(state, {});
-export const getters = getterTree(state, {});
+
+export type RootState = ReturnType<typeof state>
+export const mutations = mutationTree(state, {
+    SET_ERROR(state: RootState, data: string) {
+        state.data = data;
+    }
+});
+export const getters = getterTree(state, {
+    GET_ERRORS(state: RootState) {
+        return state.data;
+    },
+
+});
 export const actions = actionTree({ state, getters, mutations }, {});
 
 export const accessorType = getAccessorType({
