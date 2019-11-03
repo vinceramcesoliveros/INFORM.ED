@@ -30,6 +30,14 @@
 import Vue from 'vue'
 const title: string = 'Dashboard'
 export default Vue.extend({
+  async fetch({ app: { $accessor } }) {
+    try {
+      await $accessor.posts.FETCH_POSTS()
+    } catch (error) {
+      $accessor.SET_ERROR(error.message)
+      console.log(error)
+    }
+  },
   head() {
     return {
       titleTemplate: 'Dashboard'
@@ -44,14 +52,8 @@ export default Vue.extend({
     }
   },
   components: {},
-  async beforeCreate() {
+  async mounted() {
     this.$accessor.UI.updateTitle({ title })
-    try {
-      await this.$accessor.posts.FETCH_POSTS()
-    } catch (error) {
-      this.$accessor.SET_ERROR(error.message)
-      console.log(error)
-    }
   }
 })
 </script>
