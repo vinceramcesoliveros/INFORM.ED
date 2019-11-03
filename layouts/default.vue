@@ -3,9 +3,9 @@
     <nav-bar></nav-bar>
     <misc />
     <v-content>
-      <nuxt/>
+      <nuxt />
     </v-content>
-    
+
     <side-bar></side-bar>
   </v-app>
 </template>
@@ -34,6 +34,9 @@ export default Vue.extend({
       } else {
         this.$accessor.UI.desktopView()
       }
+      console.log('CLIENT')
+    } else {
+      console.log('SERVER')
     }
   }
 })

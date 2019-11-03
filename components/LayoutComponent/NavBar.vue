@@ -2,18 +2,12 @@
   <v-app-bar fixed app flat dense :clipped-right="false">
     <v-app-bar-nav-icon @click="updateDrawer" v-if="getMobileView" />
     <v-toolbar-title v-text="getTitle" v-if="!getMobileView" class="mr-2" />
-    <v-spacer></v-spacer>
-    <v-text-field
-      type="search"
-      prepend-inner-icon="mdi-magnify"
-      class="mr-5 mt-5"
-      placeholder="Search Student"
-    ></v-text-field>
     <v-spacer />
-    <v-badge color="red lighten-2" overlap>
+    <!-- The binding of the value will show if there are notifications -->
+    <v-badge color="green lighten-2" overlap :value="notificationCount !== 0">
       <template v-slot:badge>
         <!-- Notification Count badge, -->
-        <span v-if="notificationCount !== 0">{{notificationCount}}</span>
+        <span>{{notificationCount}}</span>
       </template>
       <v-icon @click="clickedNotification">mdi-bell</v-icon>
     </v-badge>
@@ -70,7 +64,7 @@ export default Vue.extend({
           icon: 'mdi-account',
           /**
            * you can put arrow function here
-           * but you can't call `this.action()` inside of a data class.
+           * but you can't call `this.action()` inside of a data method.
            */
           action: () => this.$router.push('/account')
         },
@@ -96,7 +90,6 @@ export default Vue.extend({
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
     },
     clickedNotification() {
-      console.log('CLICKED NOTIFICATION')
       this.notificationCount = 0
       this.$router.push('/notifications')
     }
