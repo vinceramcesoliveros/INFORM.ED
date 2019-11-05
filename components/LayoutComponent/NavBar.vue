@@ -1,7 +1,10 @@
 <template>
   <v-app-bar fixed app flat dense :clipped-right="false">
-    <v-app-bar-nav-icon @click="updateDrawer" v-if="getMobileView" />
-    <v-toolbar-title v-text="getTitle" v-if="!getMobileView" class="mr-2" />
+    <v-app-bar-nav-icon
+      @click="updateDrawer"
+      class="d-none d-sm-flex d-md-flex d-lg-none d-xl-none"
+    />
+    <v-toolbar-title v-text="getTitle" class="mr-2" />
     <v-spacer />
     <!-- The binding of the value will show if there are notifications -->
     <v-badge color="green lighten-2" overlap :value="notificationCount !== 0">
@@ -11,10 +14,14 @@
       </template>
       <v-icon @click="clickedNotification">mdi-bell</v-icon>
     </v-badge>
-    <v-btn icon v-if="getMobileView" @click="updateRightDrawer" class="ml-2">
+    <v-btn
+      icon
+      class="d-none d-sm-flex d-md-flex d-lg-none d-xl-none ml-2"
+      @click="updateRightDrawer"
+    >
       <v-icon>mdi-message-alert</v-icon>
     </v-btn>
-    <v-tooltip bottom eager v-if="!getMobileView">
+    <v-tooltip bottom eager  class="d-none d-sm-flex d-md-flex d-lg-none d-xl-none ml-2">
       <template v-slot:activator="{ on }">
         <v-icon
           v-on="on"
@@ -31,7 +38,7 @@
         <v-icon v-on="on" icon :ripple="false" class="ml-3">mdi-account-circle</v-icon>
       </template>
       <v-list dense>
-        <v-list-item @click="updateDarkMode" v-if="getMobileView">
+        <v-list-item @click="updateDarkMode" class="d-none d-sm-flex d-md-flex d-lg-none d-xl-none ml-2">
           <v-list-item-action>
             <v-icon>{{ getDarkMode ? 'mdi-lightbulb':'mdi-lightbulb-on'}}</v-icon>
           </v-list-item-action>
@@ -101,6 +108,11 @@ export default Vue.extend({
     getDarkMode(): boolean {
       return this.$vuetify.theme.dark
     },
+    /**
+     * We will keep this function to determine if the mobile has
+     * a kind of functionality the same as the browser from the
+     * desktop.
+     */
     getMobileView(): boolean {
       return this.$accessor.UI.width < 1260
     }

@@ -5,8 +5,8 @@ export default {
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    titleTemplate: '%s - ' + process.env.npm_package_description,
+    title: process.env.npm_package_description || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -57,7 +57,6 @@ export default {
    * Loading UI
    */
 
-  loading: '~/components/Skeleton/SkeletonUI.vue',
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
