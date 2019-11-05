@@ -12,9 +12,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Misc from '@/components/LayoutComponent/Misc.vue'
-import SideBar from '@/components/LayoutComponent/SideBar.vue'
-import NavBar from '@/components/LayoutComponent/NavBar.vue'
 export default Vue.extend({
   components: {
     'side-bar': () => import('@/components/LayoutComponent/SideBar.vue'),
