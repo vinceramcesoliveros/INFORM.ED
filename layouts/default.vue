@@ -21,7 +21,7 @@ export default Vue.extend({
   data() {
     return {}
   },
-  created() {
+  mounted() {
     if (process.client) {
       window.addEventListener('resize', () => {
         this.$accessor.UI.updateWidth(window.innerWidth)
@@ -31,9 +31,14 @@ export default Vue.extend({
       } else {
         this.$accessor.UI.desktopView()
       }
-      console.log('CLIENT')
-    } else {
-      console.log('SERVER')
+    } 
+  },
+
+  beforeDestroy() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', () => {
+        this.$accessor.UI.updateWidth(window.innerWidth)
+      })
     }
   }
 })

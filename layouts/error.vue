@@ -8,6 +8,7 @@
             class="grey lighten-2"
             max-height="60rem"
             max-width="40rem"
+            contain
           ></v-img>
         </v-flex>
         <v-flex xs12 md12 lg12>
