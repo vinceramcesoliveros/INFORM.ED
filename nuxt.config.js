@@ -78,10 +78,10 @@ export default {
           warning: colors.amber.base,
           error: colors.red.darken2,
           success: colors.green.accent3,
-          
+
         },
         dark: {
-          primary: colors.shades.white,
+          primary: colors.green.lighten1,
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
@@ -96,7 +96,7 @@ export default {
   ** Build configuration
   */
   build: {
-    transpile:[
+    transpile: [
       /nuxt-typed-vuex/,
     ],
     /*
