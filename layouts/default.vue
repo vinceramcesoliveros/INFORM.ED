@@ -5,7 +5,6 @@
     <v-content>
       <nuxt />
     </v-content>
-
     <side-bar></side-bar>
   </v-app>
 </template>
@@ -21,5 +20,10 @@ export default Vue.extend({
   data() {
     return {}
   },
+  mounted() {
+    if (process.client) {
+      this.$accessor.UI.updateWidth(window.innerWidth)
+    }
+  }
 })
 </script>

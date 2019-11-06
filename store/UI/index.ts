@@ -94,17 +94,24 @@ export const mutations = mutationTree(state, {
     updateDarkMode(state: RootState): void {
         state.darkMode = !state.darkMode
     },
-    mobileView(state: RootState): void {
-        state.drawer = false;
-        state.rightDrawer = false;
-    },
-    
-    desktopView(state: RootState): void {
-        state.drawer = true;
-        state.rightDrawer = true;
-    },
-    updateWidth(state: RootState, data: number): void {
-        state.width = data;
+
+    /**
+     * On initial load of the page.
+     * The drawer is set to false for mobile view.
+     * This function will set the value of the width
+     * as well as update the value of the drawer.
+     * The UI will become more responsive without
+     * adding the event listener.
+     */
+    updateWidth(state: RootState, width: number): void {
+        state.width = width;
+        if (state.width > 1260) {
+            state.drawer = true
+            state.rightDrawer = true
+        } else {
+            state.drawer = false;
+            state.drawer = false;
+        }
     }
 })
 

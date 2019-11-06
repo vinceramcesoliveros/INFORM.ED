@@ -9,18 +9,23 @@
           <v-card-title class="title">INFORM.ED</v-card-title>
           <v-card-subtitle class="subtitle">Information Education Platform</v-card-subtitle>
           <v-card-text>
-            <v-form @submit.prevent="login" ref="formLogin">
+            <v-form @submit.prevent="login" ref="formLogin" lazy-validation>
               <v-text-field
                 id="login-form"
+                v-model="user.name"
                 label="Login"
-                hint="Your ID number from the unversity you're currently enrolled"
+                hint="Your username or school ID"
                 name="login"
+                :rules="[v => !!v||'Account must be provided']"
                 prepend-icon="mdi-account"
                 type="text"
+                :placeholder="getDate"
                 required
               />
 
               <v-text-field
+                v-model="user.password"
+                :rules="[v => !!v || 'Input password' ]"
                 id="password-form"
                 label="Password"
                 name="password"
@@ -29,7 +34,23 @@
                 required
               />
 
-              <v-btn color="primary" :ripple="false" class="elevation-0" type="submit" block>Login</v-btn>
+              <v-btn
+                color="primary"
+                :ripple="false"
+                depressed
+                type="submit"
+                block
+                rounded
+                class="mb-2"
+              >Login</v-btn>
+              <v-btn
+                class="grey darken-2 white--text mb-2"
+                rounded
+                block
+                :ripple="false"
+              >
+                <v-icon class="mr-3">mdi-github-circle</v-icon>Sign in with GitHub
+              </v-btn>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -64,6 +85,10 @@ export default Vue.extend({
   computed: {
     isMobile() {
       return this.$accessor.UI.width < 1260
+    },
+    getDate() {
+      const date = new Date()
+      return `Example: ${date.getFullYear()}${date.getMonth()}${date.getDate()} or pikachu123`
     }
   },
   methods: {
