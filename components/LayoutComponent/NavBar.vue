@@ -21,12 +21,12 @@
     >
       <v-icon>mdi-message-alert</v-icon>
     </v-btn>
-    <v-tooltip bottom eager  class="d-none d-sm-flex d-md-flex d-lg-none d-xl-none ml-2">
+    <v-tooltip bottom eager  class="">
       <template v-slot:activator="{ on }">
         <v-icon
           v-on="on"
           @click="updateDarkMode"
-          class="ml-2"
+          class="ml-2 d-none d-sm-none d-md-none d-lg-flex d-xl-flex ml-2"
           :ripple="false"
         >{{ getDarkMode ? 'mdi-brightness-3':'mdi-brightness-5'}}</v-icon>
       </template>
@@ -118,9 +118,6 @@ export default Vue.extend({
     }
   },
   mounted() {
-    if (process.client) {
-      this.$accessor.UI.updateWidth(window.innerWidth)
-    }
     /** Will replace this into vuex, where whenever we navigate our page,
      *  the notification count will be triggered.
      */
