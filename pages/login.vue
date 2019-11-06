@@ -62,7 +62,7 @@ export default Vue.extend({
   },
   layout: 'login',
   computed: {
-    isMoible() {
+    isMobile() {
       return this.$accessor.UI.width < 1260
     }
   },
