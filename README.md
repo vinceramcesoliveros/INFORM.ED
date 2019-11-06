@@ -4,12 +4,23 @@ Open source project that can be used in any colleges/universities/institutions, 
 and simplify the workflow. The Goal of the Project is to decentralize the education system we are facing today.
 <hr> 
 
+## Sub Projects
+- Superpowered Enrollment System with payment integration(SOON)
+- Decentralized Club Organization Platform(SOON)
+- SMS & Email Updates to all sub-projects(SOON)
+
 ### Problem:
-We want our status of education to be digitalized, not stored in a university, and not stored in a tangible documents.
+We want our status of education to be digitalized, not stored in a university, and not stored in a tangible documents. There can be a sub-project prior to this big project. Which will be included in the future release.
+
+
+
 
 ### Roadmap 🏁 
-TBD
-
+- Finish UI
+- API Prototyping
+- Compatible with Microservices
+- Contributors
+- TBD(Unspecified but will be labeled later on)
 
 ### Built With
 - NuxtJS
