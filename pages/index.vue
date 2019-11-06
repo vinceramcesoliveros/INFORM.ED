@@ -1,7 +1,7 @@
 <template>
   <v-layout justify-center align-content-center>
     <div v-if="getPosts" style="width:100%">
-      <v-col v-for="post in getPosts" :key="post.id">
+      <v-col v-for="(post,index) in getPosts" :key="post.id">
         <v-card class="mt-3 mt-1" outlined>
           <v-list-item>
             <v-list-item-avatar color="grey"></v-list-item-avatar>
@@ -14,6 +14,10 @@
             <v-btn text color="primary" small :ripple="false">See more</v-btn>
           </v-card-actions>
         </v-card>
+
+        <div v-if="index === getPosts.length -1" class="text-center">
+          <v-btn text ref="loadButton" :ripple="false" color="primary">Load more</v-btn>
+        </div>
       </v-col>
     </div>
 

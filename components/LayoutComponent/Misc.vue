@@ -45,15 +45,11 @@ export default Vue.extend({
       return this.$accessor.comments.GET_COMMENTS
     }
   },
-  created() {
-    console.log('COMMENTS: ', this.getComments)
-  },
   async mounted() {
     try {
       await this.$accessor.comments.FETCH_COMMENTS()
     } catch (error) {
       this.$accessor.SET_ERROR(error)
-      console.log(error)
     }
   }
 })
