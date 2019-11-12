@@ -33,6 +33,10 @@ We want our status of education to be digitalized, not stored in a university, a
 
 ## Build Setup
 
+> Node Version must be 12.x, for more info visit [Nodejs.org](https://nodejs.org)
+
+> If you want to use NPM as your package manager. be sure to not include `package.lock.json` when submitting a pull request.
+
 ``` bash
 # install dependencies
 $ yarn install #npm install
