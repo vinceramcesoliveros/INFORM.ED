@@ -98,7 +98,10 @@ export default Vue.extend({
     /** Will replace this into vuex, where whenever we navigate our page,
      *  the notification count will be triggered.
      */
-    this.notificationCount = Math.floor(Math.random() * 100 + 1)
+    if (this.$route.name !== 'notifications') {
+      this.notificationCount = Math.floor(Math.random() * 100 + 1)
+    }
+    this.notificationCount = 0
   }
 })
 </script>
