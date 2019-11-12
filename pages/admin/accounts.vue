@@ -52,34 +52,47 @@ export default Vue.extend({
       return this.headers
     }
   },
-  async mounted() {
-    try {
-      const res: AxiosResponse<Account[]> = await this.$axios.get(
-        'http://localhost:1337/accounts'
-      )
-      this.accounts = res.data.map(account => {
+  methods: {
+    // We will move this to a mixin class if reusability counts.
+    // If we find it somehow repititive if it is being used in
+    // the admin panel.
+    // makeTable<T>(data: T)
+    // makeKeyTable(key: T)
+    makeAccounts<T extends Account[]>(data: Account[]) {
+      return data.map(account => {
         return {
-          id: account.id,
-          accountID: account.accountID,
-          firstname: account.firstname,
-          middlename: account.middlename,
-          lastname: account.lastname,
-          gender: account.gender,
-          email: account.email,
-          img_profile: account.img_profile
+          ...account
         }
       })
-
-      this.accounts.forEach((account, index) => {
-        const key = Object.keys(account)
-        const item: Header[] = key.map(element => {
+    },
+    makeKeyAccounts(accounts: any) {
+      let key: string[] = []
+      for (const account of accounts) {
+        key = Object.keys(account)
+      }
+      const item: Header[] = key.map((element, index) => {
+        const newElement = accounts[index]
+        if (typeof newElement[element] !== 'object') {
           return {
             text: element ? element : '',
             value: element ? element : ''
           }
-        })
-        this.headers = item
+        }
+        return {
+          text: '',
+          value: ''
+        }
       })
+      return item
+    }
+  },
+  async mounted() {
+    try {
+      const res: AxiosResponse<Account[]> = await this.$axios.get(
+        'https://jsonplaceholder.typicode.com/users'
+      )
+      this.accounts = this.makeAccounts<Account[]>(res.data)
+      this.headers = this.makeKeyAccounts(this.accounts)
     } catch (error) {
       console.log(error)
     }
