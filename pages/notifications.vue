@@ -8,9 +8,7 @@
     </v-row>
     <v-list>
       <v-list-item v-for="todo in todos" :key="todo.id">
-        <v-card>
-          <v-card-title v-text="todo.title"></v-card-title>
-        </v-card>
+        <v-list-item-title v-text="todo.title"></v-list-item-title>
       </v-list-item>
     </v-list>
   </v-container>
@@ -23,7 +21,6 @@ export default Vue.extend({
     const { data } = await $axios.get(
       'https://jsonplaceholder.typicode.com/todos?_limit=10'
     )
-    console.log(data)
     return {
       todos: data
     }
