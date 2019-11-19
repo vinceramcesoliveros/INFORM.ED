@@ -25,7 +25,7 @@
       </template>
       <span>Toggle {{getDarkMode ? 'Light':'Dark'}} mode</span>
     </v-tooltip>
-    <infoMenu />
+    <InfoMenu />
   </v-app-bar>
 </template>
 
@@ -36,12 +36,12 @@ import { mapMutations, mapGetters } from 'vuex'
 export default Vue.extend({
   data() {
     return {
-      width: 9999,
+      width: 4000,
       notificationCount: 0
     }
   },
   components: {
-    infoMenu: () => import('./Menu.vue')
+    InfoMenu: () => import('./Menu.vue')
   },
   methods: {
     ...mapMutations({
@@ -64,6 +64,7 @@ export default Vue.extend({
        * a set of strings,
        * from teacher-subjects
        * to teacher subjects
+       *
        */
       const splitable = this.$route.name
         ? this.$route.name.split('-')
