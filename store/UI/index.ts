@@ -1,4 +1,4 @@
-import { getterTree, actionTree, mutationTree } from 'nuxt-typed-vuex'
+import { getterTree, mutationTree } from 'nuxt-typed-vuex'
 
 export const state = () => ({
   width: 9999,
