@@ -10,9 +10,9 @@
         class="d-none d-sm-flex d-md-flex d-lg-none d-xl-none ml-2"
       >
         <v-list-item-action>
-          <v-icon>{{ getDarkMode ? 'mdi-lightbulb':'mdi-lightbulb-on'}}</v-icon>
+          <v-icon>{{ getDarkMode ? 'mdi-lightbulb-on':'mdi-lightbulb'}}</v-icon>
         </v-list-item-action>
-        <v-list-item-title>Dark Mode</v-list-item-title>
+        <v-list-item-title>{{getDarkMode ? 'Light':'Dark'}} Mode</v-list-item-title>
       </v-list-item>
       <v-list-item v-for="(item,index) in items" :key="index" @click="item.action">
         <v-list-item-action>
@@ -51,10 +51,10 @@ export default Vue.extend({
       ]
     }
   },
-   methods: {
+  methods: {
     updateDarkMode() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-    },
+    }
   },
   computed: {
     getDarkMode(): boolean {
@@ -68,7 +68,7 @@ export default Vue.extend({
     getMobileView(): boolean {
       return this.$accessor.UI.width < 1260
     }
-  },
+  }
 })
 </script>
 
