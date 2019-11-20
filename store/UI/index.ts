@@ -1,5 +1,6 @@
 import { getterTree, mutationTree } from 'nuxt-typed-vuex'
-
+import { Administrator } from 'interfaces/Administrator'
+import { Item } from 'interfaces/Item'
 export const state = () => ({
   width: 9999,
   title: '',
@@ -127,14 +128,3 @@ export const getters = getterTree(state, {
     return state.darkMode
   }
 })
-
-type Item = {
-  icon: string
-  title: string
-  to: string
-}
-type Administrator = {
-  icon: string
-  title: string
-  to: string
-}
