@@ -13,7 +13,7 @@
       </v-row>
     </v-container>
     <v-data-table v-if="getAccounts" :items="getAccounts" :headers="getHeaders"></v-data-table>
-    <v-skeleton-loader v-else min-width="90%" class="mx-auto mt-5" type="table"></v-skeleton-loader>
+    <v-skeleton-loader v-else min-width="100%" class="mx-auto mt-5" type="table"></v-skeleton-loader>
   </v-layout>
 </template>
 
@@ -21,23 +21,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { AxiosResponse } from 'axios'
+import { Account } from 'interfaces/Account'
 type Header = {
   text: string
   value: string
-}
-interface Account {
-  id: number
-  accountID: number
-  firstname: string
-  middlename?: string | ''
-  lastname: string
-  gender: Gender
-  email: string
-  img_profile: any
-}
-enum Gender {
-  male,
-  female
 }
 export default Vue.extend({
   data: () => ({
