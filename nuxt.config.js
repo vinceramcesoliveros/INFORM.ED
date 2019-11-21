@@ -96,6 +96,7 @@ export default {
    ** Build configuration
    */
   build: {
+    cache:true,
     transpile: [/nuxt-typed-vuex/],
     /*
      ** You can extend webpack config here
