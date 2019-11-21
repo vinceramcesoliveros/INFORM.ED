@@ -100,9 +100,11 @@ export default Vue.extend({
      *  the notification count will be triggered.
      */
     if (this.$route.name !== 'notifications') {
+      // Please don't use ternary operator in this logic.
       this.notificationCount = Math.floor(Math.random() * 100 + 1)
+    } else {
+      this.notificationCount = 0
     }
-    this.notificationCount = 0
   }
 })
 </script>
