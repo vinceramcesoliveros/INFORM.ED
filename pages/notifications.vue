@@ -6,9 +6,13 @@
         <v-btn small outlined :ripple="false">Clear All</v-btn>
       </v-col>
     </v-row>
-    <v-list>
-      <v-list-item v-for="todo in todos" :key="todo.id">
-        <v-list-item-title v-text="todo.title"></v-list-item-title>
+    <v-list three-line>
+      <v-list-item v-for="todo in todos" @click="$router.push(todo.url)" :key="todo.id">
+        <v-list-item-avatar color="grey"></v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title v-text="todo.title"></v-list-item-title>
+          <v-list-item-subtitle v-text="todo.title"></v-list-item-subtitle>
+        </v-list-item-content>
       </v-list-item>
     </v-list>
   </v-container>
