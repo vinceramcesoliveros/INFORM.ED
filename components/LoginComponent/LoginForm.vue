@@ -1,5 +1,5 @@
 <template>
-  <v-form @submit.prevent="login" ref="formLogin" lazy-validation>
+  <v-form @submit.prevent="login" v-model="valid" ref="formLogin" lazy-validation>
     <v-text-field
       id="login-form"
       v-model="user.name"
@@ -24,8 +24,19 @@
       required
     />
 
-    <v-btn color="primary" :ripple="false" depressed type="submit" block rounded class="mb-2">Login</v-btn>
-    <v-btn class="grey darken-2 white--text mb-2" rounded block :ripple="false">
+    <v-btn color="primary" :ripple="false" depressed type="submit" block rounded class="mb-2">
+      <div v-if="loading" class="text-center">
+        <v-progress-circular :size="20" color="white" indeterminate></v-progress-circular>
+      </div>
+      <div v-else>Login</div>
+    </v-btn>
+    <v-btn
+      class="grey darken-2 white--text mb-2"
+      @click="$router.push('/')"
+      rounded
+      block
+      :ripple="false"
+    >
       <v-icon class="mr-3">mdi-github-circle</v-icon>Sign in with GitHub
     </v-btn>
   </v-form>
@@ -37,6 +48,8 @@ import { User } from 'interfaces/Users'
 export default Vue.extend({
   data() {
     return {
+      valid: true,
+      loading: false,
       user: {
         name: null,
         password: null
@@ -51,8 +64,14 @@ export default Vue.extend({
   },
   methods: {
     login(e: Event) {
-      console.log(e.target)
-      this.$router.push('/')
+      //@ts-ignore
+      if (this.$refs['formLogin'].validate()) {
+        this.loading = true
+        setTimeout(() => {
+          this.$router.push('/')
+          this.loading = false
+        }, 3000)
+      }
     }
   }
 })
