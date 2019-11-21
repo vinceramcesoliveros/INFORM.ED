@@ -9,6 +9,7 @@ and simplify the workflow. The Goal of the Project is to decentralize the educat
 
 - Superpowered Enrollment System with payment integration(SOON)
 - Decentralized Club Organization Platform(SOON)
+  - This handles the club organization including regional club organization, control of the budget from the school, and accomplishments.
 - SMS & Email Updates to all sub-projects(SOON)
 
 ### Problem:
