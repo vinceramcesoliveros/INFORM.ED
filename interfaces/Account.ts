@@ -4,17 +4,18 @@
  */
 
 export interface Account {
-    id: number
-    accountID: number
-    firstname: string
-    middlename?: string | ''
-    lastname: string
-    gender: Gender
-    email: string
-    img_profile: any
-  };
+  id?: number
+  accountID?: number
+  name: string
+  // firstname: string
+  // middlename?: string | ''
+  // lastname: string
+  gender?: Gender
+  email: string
+  img_profile?: any
+}
 
 enum Gender {
-    male,
-    female
-  }
+  male,
+  female
+}
