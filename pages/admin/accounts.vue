@@ -6,13 +6,17 @@
           <p class="title">Accounts</p>
         </v-col>
         <v-col align-self="end" class="text-right">
-          <v-btn outlined :ripple="false">
-            <v-icon>mdi-plus</v-icon>Account
-          </v-btn>
+          <account-add-dialog />
         </v-col>
       </v-row>
     </v-container>
-    <v-data-table v-if="getAccounts" :items="getAccounts" :headers="getHeaders"></v-data-table>
+
+    <v-row v-if="getAccounts" justify="center">
+      <v-card style="width:95%">
+        <v-data-table :items="getAccounts" :headers="getHeaders"></v-data-table>
+      </v-card>
+    </v-row>
+
     <v-skeleton-loader v-else min-width="100%" class="mx-auto mt-5" type="table"></v-skeleton-loader>
   </v-layout>
 </template>
@@ -27,34 +31,25 @@ type Header = {
   value: string
 }
 export default Vue.extend({
+  components: {
+    'account-add-dialog': () =>
+      import('@/components/AccountComponent/AddAccount.vue')
+  },
   data: () => ({
-    accounts: [] as Account[],
     headers: [] as Header[]
   }),
   computed: {
     getAccounts() {
-      return this.accounts
+      return this.$accessor.accounts.accounts
     },
     getHeaders() {
       return this.headers
     }
   },
   methods: {
-    // We will move this to a mixin class if reusability counts.
-    // If we find it somehow repititive if it is being used in
-    // the admin panel.
-    // makeTable<T>(data: T)
-    // makeKeyTable(key: T)
-    makeAccounts<T extends Account[]>(data: Account[]) {
-      return data.map(account => {
-        return {
-          ...account
-        }
-      })
-    },
     makeKeyAccounts(accounts: any) {
       let key: string[] = []
-      for (const account of accounts) {
+      for (const account of this.getAccounts) {
         key = Object.keys(account)
       }
       const item: Header[] = key.map((element, index) => {
@@ -73,16 +68,10 @@ export default Vue.extend({
       return item
     }
   },
+
   async mounted() {
-    try {
-      const res: AxiosResponse<Account[]> = await this.$axios.get(
-        'https://jsonplaceholder.typicode.com/users'
-      )
-      this.accounts = this.makeAccounts<Account[]>(res.data)
-      this.headers = this.makeKeyAccounts(this.accounts)
-    } catch (error) {
-      console.log(error)
-    }
+    await this.$accessor.accounts.FETCH_ACCOUNTS()
+    this.headers = this.makeKeyAccounts(this.$accessor.accounts.GET_ACCOUNTS)
   }
 })
 </script>
