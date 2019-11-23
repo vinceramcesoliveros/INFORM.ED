@@ -81,7 +81,11 @@ export const state = () => ({
 
 export type RootState = ReturnType<typeof state>
 export const mutations = mutationTree(state, {
-  updateDrawer(state: RootState): void {
+  closeDrawer(state: RootState): void {
+    state.drawer = false
+    state.rightDrawer = false
+  },
+  updateLeftDrawer(state: RootState): void {
     state.drawer = !state.drawer
   },
   updateRightDrawer(state: RootState): void {

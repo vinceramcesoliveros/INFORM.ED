@@ -26,7 +26,7 @@ export default Vue.extend({
       'https://jsonplaceholder.typicode.com/todos?_limit=10'
     )
     return {
-      todos: data
+      todos: {...data,url:''}
     }
   }
 })

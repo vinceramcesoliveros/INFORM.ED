@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app flat dense :clipped-right="false">
-    <v-app-bar-nav-icon @click="updateDrawer" class="d-sm-flex d-lg-none d-xl-none" />
+    <v-app-bar-nav-icon @click="updateLeftDrawer" class="d-sm-flex d-lg-none d-xl-none" />
     <v-toolbar-title v-text="getTitle" class="mr-2 title" />
     <v-spacer />
     <!-- The binding of the value will show if there are notifications -->
@@ -45,7 +45,7 @@ export default Vue.extend({
   },
   methods: {
     ...mapMutations({
-      updateDrawer: 'UI/updateDrawer',
+      updateLeftDrawer: 'UI/updateLeftDrawer',
       updateRightDrawer: 'UI/updateRightDrawer'
     }),
     updateDarkMode() {
