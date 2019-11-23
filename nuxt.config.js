@@ -71,7 +71,7 @@ export default {
         light: {
           primary: colors.green.lighten1,
           accent: colors.grey.lighten3,
-          secondary: colors.amber.lighten3,
+          secondary: colors.purple.lighten2,
           info: colors.teal.darken1,
           warning: colors.amber.base,
           error: colors.red.darken2,
@@ -80,7 +80,7 @@ export default {
         dark: {
           primary: colors.green.lighten1,
           accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          secondary: colors.deepPurple2,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
@@ -96,7 +96,7 @@ export default {
    ** Build configuration
    */
   build: {
-    cache:true,
+    cache: true,
     transpile: [/nuxt-typed-vuex/],
     /*
      ** You can extend webpack config here
