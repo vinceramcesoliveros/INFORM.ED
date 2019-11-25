@@ -1,13 +1,13 @@
 import { actionTree, getterTree, mutationTree } from 'nuxt-typed-vuex'
-import { Account } from 'interfaces/Account'
+import { IAccount } from 'interfaces/Account'
 import { AxiosResponse } from 'axios'
 import TableMixins from 'mixins/TableMixins'
 export const state = () => ({
-  accounts: [] as Account[]
+  accounts: [] as IAccount[]
 })
 export type RootState = ReturnType<typeof state>
 export const mutations = mutationTree(state, {
-  SET_ACCOUNTS(state: RootState, accounts: Account[]) {
+  SET_ACCOUNTS(state: RootState, accounts: IAccount[]) {
     //This example below is just an overkill, but if we create a
     //factory function that handles the callback, then we'll use this
     //state.accounts = TableMixins.makeTable(account, items => items)
@@ -36,7 +36,7 @@ export const actions = actionTree(
   {
     async FETCH_ACCOUNTS({ commit }) {
       try {
-        const res: AxiosResponse<Account[]> = await this.$axios.get(
+        const res: AxiosResponse<IAccount[]> = await this.$axios.get(
           'https://jsonplaceholder.typicode.com/users'
         )
         commit('SET_ACCOUNTS', res.data)
