@@ -17,15 +17,19 @@
       </v-card>
     </v-row>
 
-    <v-skeleton-loader v-else min-width="100%" class="mx-auto mt-5" type="table"></v-skeleton-loader>
+    <v-skeleton-loader
+      v-else
+      min-width="100%"
+      class="mx-auto mt-5"
+      type="table"
+    ></v-skeleton-loader>
   </v-layout>
 </template>
-
 
 <script lang="ts">
 import Vue from 'vue'
 import { AxiosResponse } from 'axios'
-import { Account } from 'interfaces/Account'
+import { IAccount } from 'interfaces/Account'
 type Header = {
   text: string
   value: string
@@ -76,5 +80,4 @@ export default Vue.extend({
 })
 </script>
 
-<style>
-</style>
+<style></style>
