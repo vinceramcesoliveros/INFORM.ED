@@ -2,8 +2,8 @@
   <v-layout align-center justify-center>
     <v-row>
       <Images />
-      <v-col xl="6" lg="6" sm="0" md="0" xs="12" align-self="start">
-        <v-card outlined max-height="600" max-width="400">
+      <v-col xl="6" lg="6" sm="0" md="12" xs="12" align-self="start">
+        <v-card outlined max-height="600" min-width="100">
           <v-card-title class="title">INFORM.ED</v-card-title>
           <v-card-subtitle class="subtitle">Information Education Platform</v-card-subtitle>
           <v-card-text>
