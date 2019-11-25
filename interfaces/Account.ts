@@ -3,7 +3,7 @@
  * simplicity.
  */
 
-export interface Account {
+export interface IAccount {
   id?: number
   accountID?: number
   name: string
