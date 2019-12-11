@@ -1,8 +1,10 @@
-# INFORM.ED
-
+<div style="text-align:center;font-family:Helvetica">
+<h1 style="color:teal">INFORM.ED
+</h1>
+<p style="text-align:justify">
 Open source project that can be used in any colleges/universities/institutions, Using NuxtJS to power up the tools
-and simplify the workflow. The Goal of the Project is to decentralize the education system we are facing today.
-
+and simplify the workflow. The Goal of the Project is to decentralize the education system we are facing today.</p>
+</div>
 <hr>
 
 ## Sub Projects
@@ -13,8 +15,8 @@ and simplify the workflow. The Goal of the Project is to decentralize the educat
 - SMS & Email Updates to all sub-projects(SOON)
 
 ### Problem:
-
-We want our status of education to be digitalized, not stored in a university, and not stored in a tangible documents. There can be a sub-project prior to this big project. Which will be included in the future release.
+<p style="text-align:justify">
+We want our status of education to be digitalized, not stored in a university, and not stored in a tangible documents. There can be a sub-project prior to this big project. Which will be included in the future release.</p>
 
 ## Why?
 
@@ -30,18 +32,18 @@ We want our status of education to be digitalized, not stored in a university, a
 
 ### Built With
 
-- NuxtJS
-- TypeScript
+- [NuxtJS](https://nuxtjs.org)
+- [TypeScript](https://typescript.org)
 - [Nuxt Typed Vuex](https://github.com/danielroe/nuxt-typed-vuex)(Vanilla TS)
-- ~~PostgreSQL~~ Until further research. MongoDB will be a viable option to increase scalability
-- ~~ExpressJS (Will transition to GO if performance is concerned)~~ TBD
-- Strapi for API Prototyping(NOT IN PRODUCTION)
-- Vuetify
+- [MongoDB](https://mongodb.com) & [PostgreSQL](https://postgresql.org)
+- [NestJS](https://nestjs.com)
+- [Vuetify](https://vuetifyjs.com)
 - Support
 
 ## Build Setup
 
-> Node Version must be 12.x, for more info visit [Nodejs.org](https://nodejs.org)
+> Node Version must be 12.x,
+> for more info visit [Nodejs.org](https://nodejs.org)
 
 > If you want to use NPM as your package manager. be sure to not include `package.lock.json` when submitting a pull request.
 
