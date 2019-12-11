@@ -1,4 +1,4 @@
-<div style="text-align:center;font-family:Helvetica">
+<div style="text-align:center;font-family:Helvetica" align="center">
 <h1 style="color:teal">INFORM.ED
 </h1>
 <p style="text-align:justify">
@@ -15,7 +15,8 @@ and simplify the workflow. The Goal of the Project is to decentralize the educat
 - SMS & Email Updates to all sub-projects(SOON)
 
 ### Problem:
-<p style="text-align:justify">
+
+<p style="text-align:justify" align="justify">
 We want our status of education to be digitalized, not stored in a university, and not stored in a tangible documents. There can be a sub-project prior to this big project. Which will be included in the future release.</p>
 
 ## Why?
