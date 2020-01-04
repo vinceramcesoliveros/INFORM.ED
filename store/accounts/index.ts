@@ -2,34 +2,35 @@ import { actionTree, getterTree, mutationTree } from 'nuxt-typed-vuex'
 import { IAccount } from 'interfaces/Account'
 import { AxiosResponse } from 'axios'
 import { validateOrReject } from 'class-validator'
-import { addAccounts } from '~/usecases/accounts'
+import { plainToClass } from 'class-transformer'
+import { Account } from '~/entities/accounts'
 
 export const state = () => ({
-  accounts: [] as IAccount[],
+  accounts: [] as Account[],
   error: '' as string
 })
 export type RootState = ReturnType<typeof state>
 export const mutations = mutationTree(state, {
-  SET_ACCOUNTS(state: RootState, accounts: IAccount[]) {
+  SET_ACCOUNTS(state: RootState, accounts: Account[]) {
     //This example below is just an overkill, but if we create a
     //factory function that handles the callback, then we'll use this
     //state.accounts = TableMixins.makeTable(account, items => items)
-    state.accounts = accounts
+    state.accounts = accounts.map(account => {
+      return {
+        ...account,
+        //@ts-ignore
+        role: account.role.name
+      }
+    })
+    console.log(state.accounts)
   },
 
   /**
    * We use validator from 'class-validator'
    * which you can read from  [entities](../../entities/accounts.ts)
    */
-  ADD_ACCOUNT(
-    state: RootState,
-    { name, email }: { name: string; email: string }
-  ) {
-    state.accounts.push({
-      name,
-      email,
-      id: Math.floor(Math.random() * 100 + 1)
-    })
+  ADD_ACCOUNT(state: RootState, account: Account) {
+    state.accounts.push(account)
   },
   SET_ACCOUNT_ERROR(state: RootState, { err }) {
     state.error = err.toString()
@@ -56,24 +57,43 @@ export const actions = actionTree(
   {
     async FETCH_ACCOUNTS({ commit }) {
       try {
-        const res: AxiosResponse<IAccount[]> = await this.$axios.get(
-          'https://jsonplaceholder.typicode.com/users'
+        const res: AxiosResponse<Account[]> = await this.$axios.get(
+          `${this.$axios.defaults.baseURL}/accounts`
         )
-
-        commit('SET_ACCOUNTS', res.data)
+        const account = plainToClass(Account, <Account[]>res.data)
+        commit('SET_ACCOUNTS', account)
       } catch (error) {
         console.log(error)
       }
     },
     async validateAccount(
       { commit },
-      { name, email }: { name: string; email: string }
+      {
+        username,
+        password,
+        firstName,
+        lastName,
+        middleName,
+        gender,
+        role,
+        image
+      }: IAccount
     ) {
       try {
-        const account = addAccounts({ name, email })
+        const objAccount = {
+          username,
+          password,
+          firstName,
+          lastName,
+          middleName,
+          gender,
+          role,
+          image
+        }
+        const newAccount = plainToClass(Account, objAccount)
 
-        await validateOrReject(account)
-        commit('ADD_ACCOUNT', { name: account.name, email: account.email })
+        await validateOrReject(newAccount)
+        commit('ADD_ACCOUNT', newAccount)
       } catch (err) {
         console.log(err)
         commit('SET_ACCOUNT_ERROR', { err: err[0].constraints.isEmail })

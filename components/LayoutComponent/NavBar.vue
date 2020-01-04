@@ -4,14 +4,14 @@
     <v-toolbar-title v-text="getTitle" class="mr-2 title" />
     <v-spacer />
     <!-- The binding of the value will show if there are notifications -->
-    <v-badge color="green lighten-2" overlap :value="notificationCount !== 0">
+    <v-badge color="primary lighten-2" overlap :value="notificationCount !== 0">
       <template v-slot:badge>
         <!-- Notification Count badge, -->
         <span>{{notificationCount}}</span>
       </template>
       <v-icon @click="clickedNotification">mdi-bell</v-icon>
     </v-badge>
-    <v-btn icon class="d-sm-flex d-md-flex d-lg-none d-xl-none ml-2" @click="updateRightDrawer">
+    <v-btn icon class="d-sm-flex d-md-flex ml-2" @click="updateRightDrawer">
       <v-icon>mdi-message-alert</v-icon>
     </v-btn>
     <v-tooltip bottom eager class>
@@ -50,6 +50,7 @@ export default Vue.extend({
     }),
     updateDarkMode() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+      localStorage.darkMode = this.$vuetify.theme.dark
     },
     clickedNotification() {
       this.notificationCount = 0
@@ -104,6 +105,10 @@ export default Vue.extend({
       this.notificationCount = Math.floor(Math.random() * 100 + 1)
     } else {
       this.notificationCount = 0
+    }
+    if (process.browser) {
+      this.$vuetify.theme.dark =
+        localStorage.getItem('darkMode') === 'true' ? true : false
     }
   }
 })

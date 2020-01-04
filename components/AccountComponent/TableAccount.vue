@@ -4,7 +4,15 @@
       <v-card style="width:95%">
         <v-text-field label="Search" id="searchId" style="width:75%" class="ml-5" v-model="search"></v-text-field>
         <v-card-title></v-card-title>
-        <v-data-table :items="accounts" :search="search" :headers="headers" filterable></v-data-table>
+        <!-- <v-data-table :items="accounts" :search="search" :headers="headers" filterable></v-data-table> -->
+        <v-row class="mx-2">
+          <v-col cols="4" v-for="account in accounts" :key="account._id">
+            <v-card class="text-center" outlined>
+              <v-avatar color="primary"></v-avatar>
+              <v-card-title v-html="account.firstName"></v-card-title>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-card>
     </v-row>
 

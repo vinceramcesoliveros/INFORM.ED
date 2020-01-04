@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer v-model="$store.state.UI.rightDrawer" right fixed app width="20rem">
     <v-list v-if="getComments" dense nav>
-      <v-list-item class="green">
+      <v-list-item class="primary">
         <v-list-item-title class="title white--text text-center">Announcements</v-list-item-title>
       </v-list-item>
       <v-divider></v-divider>
@@ -9,7 +9,7 @@
         :ripple="false"
         v-for="(comment) in getComments"
         :key="comment.id"
-        active-class=" green--text"
+        active-class=" primary--text"
         three-line
       >
         <v-card class="mt-3 mt-1" outlined>

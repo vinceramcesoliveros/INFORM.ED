@@ -10,10 +10,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <account-table
-      :accounts="getAccounts"
-      :headers="getHeaders"
-    ></account-table>
+    <account-table :accounts="getAccounts" :headers="getHeaders"></account-table>
   </v-layout>
 </template>
 

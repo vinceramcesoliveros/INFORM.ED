@@ -33,7 +33,7 @@
     <v-snackbar
       v-model="snackbar"
       class="text-center"
-      :color="message !== `Successfully added` ? 'error':'primary'"
+      :color="message !== `Successfully added` ? 'error' : 'primary'"
       :timeout="5000"
     >{{ message }}</v-snackbar>
   </div>
@@ -42,6 +42,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapMutations } from 'vuex'
+import { IAccount } from '../../interfaces/Account'
+import { Gender } from '../../entities/enums/gender'
 export default Vue.extend({
   data() {
     return {
@@ -50,7 +52,15 @@ export default Vue.extend({
       email: '',
       dialog: false,
       snackbar: false,
-      message: ''
+      message: '',
+      user: {
+        firstName: '',
+        lastName: '',
+        username: '',
+        image: '',
+        role: '',
+        gender: Gender.male || Gender.female
+      } as IAccount
     }
   },
   methods: {
@@ -58,10 +68,7 @@ export default Vue.extend({
       this.message = ''
 
       this.$accessor.accounts.CLEAR_ERROR()
-      await this.$accessor.accounts.validateAccount({
-        name: this.name,
-        email: this.email
-      })
+      await this.$accessor.accounts.validateAccount(this.user)
       this.finishValidate()
     },
     closeDialog() {

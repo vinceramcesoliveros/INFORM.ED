@@ -1,21 +1,18 @@
+import { Gender } from '~/entities/enums/gender'
+import { Role } from '~/entities/accounts'
+
 /**
  * This is temporary interface for
  * simplicity.
  */
 
 export interface IAccount {
-  id?: number
-  accountID?: number
-  name: string
-  // firstname: string
-  // middlename?: string | ''
-  // lastname: string
-  gender?: Gender
-  email: string
-  img_profile?: any
-}
-
-enum Gender {
-  male,
-  female
+  readonly username: string
+  readonly password: string
+  readonly firstName: string
+  readonly middleName: string
+  readonly lastName: string
+  readonly gender: Gender
+  readonly role: Role | string | null
+  readonly image?: string
 }

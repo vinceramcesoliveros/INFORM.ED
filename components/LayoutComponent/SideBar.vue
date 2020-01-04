@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="$store.state.UI.drawer" fixed app width="20rem">
+  <v-navigation-drawer v-model="$store.state.UI.drawer" fixed app width="15rem">
     <v-list dense nav>
       <v-list-item
         id="style-1"
@@ -9,10 +9,10 @@
         :to="item.to"
         router
         exact
-        active-class="green lighten-1 white--text"
+        active-class="primary  white--text"
       >
         <v-list-item-action>
-          <v-icon medium>{{ item.icon }}</v-icon>
+          <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title v-text="item.title" />

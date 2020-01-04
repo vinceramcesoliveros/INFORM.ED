@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import 'reflect-metadata'
 const routerBase =
   process.env.DEPLOY_ENV === 'GH_PAGES'
     ? {
@@ -9,6 +10,10 @@ const routerBase =
     : {}
 export default {
   ...routerBase,
+  server: {
+    port: 3333,
+    host: '0.0.0.0'
+  },
   mode: 'universal',
   /*
    ** Headers of the page
@@ -60,7 +65,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.PORT || 'http://localhost:3000'
+    baseURL: process.env.PORT || 'http://localhost:3000/api'
   },
   /**
    * Loading UI
@@ -78,7 +83,7 @@ export default {
     theme: {
       themes: {
         light: {
-          primary: colors.green.lighten1,
+          primary: colors.deepPurple.lighten2,
           accent: colors.grey.lighten3,
           secondary: colors.purple.lighten2,
           info: colors.teal.darken1,
@@ -87,13 +92,13 @@ export default {
           success: colors.green.accent3
         },
         dark: {
-          primary: colors.green.lighten1,
-          accent: colors.grey.darken3,
-          secondary: colors.deepPurple2,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          primary: '#64e291',
+          accent: '#226b80',
+          secondary: '#6384b3',
+          info: '#e6e56c',
+          warning: '#ff8080',
+          error: '#eb7070',
+          success: '#58b368'
         }
       }
     }

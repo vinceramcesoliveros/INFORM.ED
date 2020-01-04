@@ -24,19 +24,13 @@
       required
     />
 
-    <v-btn color="primary" :ripple="false" depressed type="submit" block rounded class="mb-2">
+    <v-btn color="primary" :ripple="false" depressed type="submit" block class="mb-2">
       <div v-if="loading" class="text-center">
         <v-progress-circular :size="20" color="white" indeterminate></v-progress-circular>
       </div>
       <div v-else>Login</div>
     </v-btn>
-    <v-btn
-      class="grey darken-2 white--text mb-2"
-      @click="$router.push('/')"
-      rounded
-      block
-      :ripple="false"
-    >
+    <v-btn class="grey darken-2 white--text mb-2" @click="$router.push('/')" block :ripple="false">
       <v-icon class="mr-3">mdi-github-circle</v-icon>Sign in with GitHub
     </v-btn>
   </v-form>

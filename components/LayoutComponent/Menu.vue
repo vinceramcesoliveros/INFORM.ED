@@ -54,6 +54,7 @@ export default Vue.extend({
   methods: {
     updateDarkMode() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+      localStorage.darkMode = this.$vuetify.theme.dark
     }
   },
   computed: {
