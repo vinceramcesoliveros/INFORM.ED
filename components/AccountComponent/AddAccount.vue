@@ -68,7 +68,6 @@ export default Vue.extend({
       this.message = ''
 
       this.$accessor.accounts.CLEAR_ERROR()
-      await this.$accessor.accounts.validateAccount(this.user)
       this.finishValidate()
     },
     closeDialog() {

@@ -1,6 +1,4 @@
-import { Account } from '@/entities/accounts'
 import { IAccount } from '~/interfaces/Account'
-import { validateOrReject } from 'class-validator'
 
 describe('Account', () => {
   let account: IAccount

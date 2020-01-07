@@ -1,9 +1,5 @@
 import { actionTree, getterTree, mutationTree } from 'nuxt-typed-vuex'
-import { IAccount } from 'interfaces/Account'
 import { AxiosResponse } from 'axios'
-import { validateOrReject } from 'class-validator'
-import { plainToClass } from 'class-transformer'
-import { Account } from '~/entities/accounts'
 
 export const state = () => ({
   accounts: [] as Account[],
@@ -60,43 +56,10 @@ export const actions = actionTree(
         const res: AxiosResponse<Account[]> = await this.$axios.get(
           `${this.$axios.defaults.baseURL}/accounts`
         )
-        const account = plainToClass(Account, <Account[]>res.data)
+        const account = res.data
         commit('SET_ACCOUNTS', account)
       } catch (error) {
         console.log(error)
-      }
-    },
-    async validateAccount(
-      { commit },
-      {
-        username,
-        password,
-        firstName,
-        lastName,
-        middleName,
-        gender,
-        role,
-        image
-      }: IAccount
-    ) {
-      try {
-        const objAccount = {
-          username,
-          password,
-          firstName,
-          lastName,
-          middleName,
-          gender,
-          role,
-          image
-        }
-        const newAccount = plainToClass(Account, objAccount)
-
-        await validateOrReject(newAccount)
-        commit('ADD_ACCOUNT', newAccount)
-      } catch (err) {
-        console.log(err)
-        commit('SET_ACCOUNT_ERROR', { err: err[0].constraints.isEmail })
       }
     }
   }

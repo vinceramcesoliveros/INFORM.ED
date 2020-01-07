@@ -1,5 +1,4 @@
 import { Gender } from '~/entities/enums/gender'
-import { Role } from '~/entities/accounts'
 
 /**
  * This is temporary interface for
@@ -13,6 +12,6 @@ export interface IAccount {
   readonly middleName: string
   readonly lastName: string
   readonly gender: Gender
-  readonly role: Role | string | null
+  readonly role: string | null
   readonly image?: string
 }
