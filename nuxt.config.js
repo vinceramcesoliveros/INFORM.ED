@@ -92,7 +92,7 @@ export default {
           success: colors.green.accent3
         },
         dark: {
-          primary: '#64e291',
+          primary: '#27d264',
           accent: '#226b80',
           secondary: '#6384b3',
           info: '#e6e56c',
