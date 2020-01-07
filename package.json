@@ -16,9 +16,6 @@
     "start": "nuxt-ts start",
     "test": "jest"
   },
-  "engines": {
-    "node": "12.x"
-  },
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.2.4",
     "@nuxtjs/axios": "^5.3.6",
