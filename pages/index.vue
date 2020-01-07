@@ -3,10 +3,24 @@
     <PostComponent :posts="getPosts" v-if="getPosts" />
     <div v-else-if="getError">
       <v-col>
-        <p class="title">{{getError}}</p>
+        <p class="title">{{ getError }}</p>
       </v-col>
     </div>
     <v-skeleton-loader v-else-if="!getPosts" min-width="90%" class="mx-auto mt-5" type="article"></v-skeleton-loader>
+    <v-btn
+      depressed
+      fixed
+      bottom
+      right
+      x-large
+      :ripple="false"
+      class="primary white--text d-sm-flex d-lg-none d-xl-none"
+      fab
+      icon
+      @click="$router.push('/post/new')"
+    >
+      <v-icon>mdi-pencil-plus</v-icon>
+    </v-btn>
     <PostButton />
   </v-layout>
 </template>
@@ -42,6 +56,9 @@ export default Vue.extend({
     },
     getError() {
       return this.$accessor.GET_ERRORS
+    },
+    getIsMobile() {
+      return this.$accessor.UI.width < 1200
     }
   },
   async mounted() {
