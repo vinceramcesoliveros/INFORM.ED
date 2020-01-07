@@ -3,11 +3,23 @@
     <v-row>
       <v-col align-self="start" class="text-left">Notifications</v-col>
       <v-col class="text-right" align-self="end">
-        <v-btn small outlined :ripple="false" rounded color="primary">Clear All</v-btn>
+        <v-btn
+          small
+          outlined
+          :ripple="false"
+          @click="todos = []"
+          rounded
+          color="primary"
+          >Clear All</v-btn
+        >
       </v-col>
     </v-row>
     <v-list three-line v-if="todos.length">
-      <v-list-item v-for="todo in todos" @click="$router.push(todo.url)" :key="todo.id">
+      <v-list-item
+        v-for="todo in todos"
+        @click="$router.push(`post/${todo.id}`)"
+        :key="todo.id"
+      >
         <v-list-item-avatar color="grey"></v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title v-text="todo.title"></v-list-item-title>
@@ -43,5 +55,4 @@ export default Vue.extend({
   }
 })
 </script>
-<style>
-</style>
+<style></style>
