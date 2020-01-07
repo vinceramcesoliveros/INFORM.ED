@@ -1,13 +1,16 @@
 <template>
   <v-app-bar app flat dense :clipped-right="false">
-    <v-app-bar-nav-icon @click="updateLeftDrawer" class="d-sm-flex d-lg-none d-xl-none" />
+    <v-app-bar-nav-icon
+      @click="updateLeftDrawer"
+      class="d-sm-flex d-lg-none d-xl-none"
+    />
     <v-toolbar-title v-text="getTitle" class="mr-2 title" />
     <v-spacer />
     <!-- The binding of the value will show if there are notifications -->
     <v-badge color="primary lighten-2" overlap :value="notificationCount !== 0">
       <template v-slot:badge>
         <!-- Notification Count badge, -->
-        <span>{{notificationCount}}</span>
+        <span>{{ notificationCount }}</span>
       </template>
       <v-icon @click="clickedNotification">mdi-bell</v-icon>
     </v-badge>
@@ -19,11 +22,12 @@
         <v-icon
           v-on="on"
           @click="updateDarkMode"
-          class="ml-2 d-none d-sm-none d-md-none d-lg-flex d-xl-flex ml-2"
+          class="ml-2 d-none d-sm-none d-md-none d-lg-flex d-xl-flex "
           :ripple="false"
-        >{{ getDarkMode ? 'mdi-brightness-3':'mdi-brightness-5'}}</v-icon>
+          >{{ getDarkMode ? 'mdi-brightness-3' : 'mdi-brightness-5' }}</v-icon
+        >
       </template>
-      <span>Toggle {{getDarkMode ? 'Light':'Dark'}} mode</span>
+      <span>Toggle {{ getDarkMode ? 'Light' : 'Dark' }} mode</span>
     </v-tooltip>
     <InfoMenu />
   </v-app-bar>
@@ -113,5 +117,4 @@ export default Vue.extend({
   }
 })
 </script>
-<style>
-</style>
+<style></style>

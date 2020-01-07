@@ -5,10 +5,7 @@
       <v-icon v-on="on" icon :ripple="false" class="ml-3">mdi-account-circle</v-icon>
     </template>
     <v-list dense>
-      <v-list-item
-        @click="updateDarkMode"
-        class="d-none d-sm-flex d-md-flex d-lg-none d-xl-none ml-2"
-      >
+      <v-list-item @click="updateDarkMode" class="d-sm-flex d-md-flex d-lg-none d-xl-none ml-2">
         <v-list-item-action>
           <v-icon>{{ getDarkMode ? 'mdi-lightbulb-on':'mdi-lightbulb'}}</v-icon>
         </v-list-item-action>
