@@ -1,6 +1,12 @@
 <template>
-  <v-layout>
-    <v-col>
+  <v-layout
+    ><v-skeleton-loader
+      v-if="!post.title"
+      min-width="90%"
+      class="mx-auto mt-5"
+      type="article"
+    ></v-skeleton-loader>
+    <v-col v-else>
       <v-card class="mt-3 mt-1" outlined>
         <v-list-item>
           <v-list-item-avatar color="grey"></v-list-item-avatar>
@@ -32,25 +38,7 @@
             </v-btn>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col
-            cols="12"
-            sm="12"
-            md="12"
-            lg="12"
-            xl="12"
-            v-for="comment in userComments"
-            :key="comment.id"
-          >
-            <v-card flat>
-              <v-list-item>
-                <v-list-item-avatar color="grey"></v-list-item-avatar>
-                <v-list-item-title v-text="comment.name"></v-list-item-title>
-              </v-list-item>
-              <v-card-text v-text="comment.body"></v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
+        <CommentLists :comments="userComments" />
       </v-card>
     </v-col>
   </v-layout>
@@ -58,6 +46,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      titleTemplate: `%s - ${this.post.title}`
+    }
+  },
   data() {
     return {
       userComments: [],
@@ -87,9 +80,12 @@ export default {
       )
       this.userComments = fetchComment.data
     }
+  },
+  components: {
+    CommentLists: () =>
+      import('@/components/DashboardComponent/CommentComponent/CommentList.vue')
   }
 }
 </script>
 
-<style>
-</style>
+<style></style>
