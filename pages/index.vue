@@ -1,45 +1,28 @@
 <template>
   <v-layout justify-center align-content-center>
-    <div v-if="getPosts" style="width:100%">
-      <v-col v-for="(post,index) in getPosts" :key="post.id">
-        <v-card class="mt-3 mt-1" outlined>
-          <v-list-item>
-            <v-list-item-avatar color="grey"></v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title v-text="post.title" />
-            </v-list-item-content>
-          </v-list-item>
-          <v-card-text v-text="post.body"></v-card-text>
-          <v-card-actions>
-            <v-btn text color="primary" small :ripple="false">See more</v-btn>
-          </v-card-actions>
-        </v-card>
-
-        <div v-if="index === getPosts.length -1" class="text-center">
-          <v-btn text ref="loadButton" :ripple="false" color="primary">Load more</v-btn>
-        </div>
-      </v-col>
-    </div>
-
+    <PostComponent :posts="getPosts" v-if="getPosts" />
     <div v-else-if="getError">
       <v-col>
         <p class="title">{{getError}}</p>
       </v-col>
     </div>
-    <v-skeleton-loader v-else min-width="90%" class="mx-auto mt-5" type="article"></v-skeleton-loader>
-
-    <v-btn class="text-xs-center" rounded bottom color="primary" depressed fixed>
-      <v-icon class="mr-3">mdi-pencil-plus</v-icon>Post
-    </v-btn>
+    <v-skeleton-loader v-else-if="!getPosts" min-width="90%" class="mx-auto mt-5" type="article"></v-skeleton-loader>
+    <PostButton />
   </v-layout>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+
 const title: string = 'Dashboard'
 export default Vue.extend({
   async fetch({ app: { $accessor } }) {
     try {
+      if (process.client) {
+        if (!navigator.onLine) {
+          throw new Error('No Internet Connection')
+        }
+      }
       if (!$accessor.posts.GET_POSTS) {
         await $accessor.posts.FETCH_POSTS()
       }
@@ -50,7 +33,7 @@ export default Vue.extend({
   },
   head() {
     return {
-      titleTemplate: 'Dashboard'
+      titleTemplate: title
     }
   },
   computed: {
@@ -61,9 +44,13 @@ export default Vue.extend({
       return this.$accessor.GET_ERRORS
     }
   },
-  components: {},
   async mounted() {
     this.$accessor.UI.updateTitle({ title })
+  },
+  components: {
+    PostComponent: () =>
+      import('@/components/DashboardComponent/PostComponent.vue'),
+    PostButton: () => import('@/components/DashboardComponent/PostButton.vue')
   }
 })
 </script>
