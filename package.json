@@ -21,7 +21,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^3.0.0-0",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.11.0",
+    "class-validator": "^0.14.0",
     "nuxt": "^2.0.0",
     "nuxt-typed-vuex": "^0.1.8",
     "reflect-metadata": "^0.1.13",
